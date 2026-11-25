@@ -2,16 +2,22 @@
 // most 160 characters.
 //
 // The line lives in LINE.txt, committed beside this file. This program does two
-// things only: it holds the line to the gate's published rules and to the two
-// shape rules the judge's brief implies, then writes it to /output/entry.txt
-// with no trailing newline, so the grader's two runs and any local run write the
-// same bytes.
+// things only: it holds the line to the gate's published rules and to the shape
+// rules the judge's brief implies, then writes it to /output/entry.txt with no
+// trailing newline, so the grader's two runs and any local run write the same
+// bytes.
 //
 // The gate (RULES.txt, "The gate"): /output/entry.txt must be UTF-8 text of 1 to
 // 160 characters, not only white space. The brief asks for a single line in the
-// terse register of a release note, so this program refuses a line that carries
-// a newline, a control character, or no version number at all, rather than
+// terse register of a release note, so this program refuses a line that carries a
+// newline, a control character, or no version number at all, rather than
 // shipping something the judge would read as prose.
+//
+// This is arm 2 of the entry. Criterion 5 of the brief asks that every character
+// work, and the round-3 board measured the field inside 5,000 millionths of a
+// win rate, so this arm also refuses its own padding: a line past 120 characters
+// is doing a second joke or a second anecdote, and arm 1's 139-character line
+// with its "Workaround:" clause was the measured example of that.
 //
 // Outside the grader, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
@@ -24,6 +30,9 @@ const here = dirname(fileURLToPath(import.meta.url));
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 const MIN_CHARS = 1;
 const MAX_CHARS = 160;
+// The house gate stops at 160. Our own limit is where the brief's "no padding"
+// stops: a single fix and its one consequence fit in 120.
+const OUR_MAX_CHARS = 120;
 
 // Read the committed line as UTF-8 and strip only the file's own final newline:
 // the text handed to the judge must be the line itself.
@@ -37,6 +46,9 @@ if (/[\u0000-\u001f\u007f]/.test(line)) throw new Error("the entry carries a con
 const chars = [...line].length;
 if (chars < MIN_CHARS || chars > MAX_CHARS) {
   throw new Error(`the entry is ${chars} characters, outside the gate's ${MIN_CHARS}-${MAX_CHARS}`);
+}
+if (chars > OUR_MAX_CHARS) {
+  throw new Error(`the entry is ${chars} characters, past our ${OUR_MAX_CHARS}: that is padding`);
 }
 if (line.trim() === "") throw new Error("the entry is only white space");
 

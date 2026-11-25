@@ -1,10 +1,11 @@
-// Local mirror of the gate for the "Real-Life Patch Notes" entry.
+// Local mirror of the gate for the "Real-Life Patch Notes" entry (arm 2).
 //
 // It runs main.ts twice into two separate directories and holds both files to the
 // published rules: UTF-8, 1-160 characters, not only white space, one line, no
 // control characters. It then holds the text to the judge's own list: a version
-// number, a fix stated as if it shipped, and the bug of the body or of daily life
-// the line is about, so the artifact cannot drift away from the thing judged.
+// number, a fix stated as if it shipped, the bug of the body the line is about,
+// and the absence of padding, so the artifact cannot drift away from the thing
+// judged.
 //
 //   node verify.mjs           # prints pass/fail, exits 1 on any fail
 
@@ -38,13 +39,15 @@ check("the file is not only white space", text.trim().length > 0);
 
 const chars = [...text].length;
 check("1 to 160 characters", chars >= 1 && chars <= 160, `${chars} chars, ${a.length} bytes`);
+check("inside our own 120-character no-padding cap", chars <= 120, `${chars} chars`);
 check("one line, no control characters", !/[\u0000-\u001f\u007f]/.test(text));
 
 check("opens on a version number", /^v\d+(\.\d+){1,3}\b/.test(text), text.slice(0, 12));
 check("states a fix, in the release register", /\bFixed\b/.test(text));
-check("states a workaround, as a shipped note does", /Workaround:/.test(text));
+check("names the defect in engineering words", /\bdesync\b/.test(text));
+check("names the bug of the body it is about", /\bitch\b/.test(text));
+check("carries no second-beat clause", !/Workaround:|Known issue:/i.test(text));
 check("no double space and no trailing space", !/ {2}/.test(text) && !/ $/.test(text));
-check("names the bug of the body it is about", /bladder/.test(text));
 check("no stray double em dash or doubled punctuation", !/—.*—|,,|\.\./.test(text));
 
 // The committed file must be the same bytes the program ships, so a hand edit to
