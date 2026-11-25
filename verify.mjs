@@ -50,6 +50,8 @@ check("names the body bug it is about", /standing up/.test(text) && /eyes/.test(
 check("fix is stated as shipped, not as a workaround", /runs long enough/.test(text) && !/Workaround:|Known issue:/i.test(text));
 check("no double space, no trailing space", !/\s{2,}/.test(text) && !/\s$/.test(text));
 check("closes on terminal punctuation", /[.!?]$/.test(text));
+check("no byte-order mark", text.charCodeAt(0) !== 0xfeff);
+check("ASCII only, so bytes equal characters", a.length === chars, `${chars} chars, ${a.length} bytes`);
 
 const committed = readFileSync(join(here, "LINE.txt"), "utf8").replace(/\r?\n$/, "");
 check("LINE.txt is exactly the shipped text", committed === text);

@@ -57,6 +57,15 @@ if (/\s$/.test(line)) throw new Error("the line ends on a space the reader would
 if (/\s{2,}/.test(line)) throw new Error("the line has a double space");
 
 const bytes = Buffer.from(line, "utf8");
+// A byte-order mark is valid UTF-8, so the gate would pass it, but the judge
+// would read it as the first character of the entry. A line that ships from this
+// program must never carry one, whichever editor wrote LINE.txt.
+if (line.charCodeAt(0) === 0xfeff) throw new Error("the line starts with a byte-order mark");
+// The text is ASCII by construction and that is the point: one character is one
+// byte, so the artifact's size in bytes is its size in characters and the size
+// tie-break cannot be lost to multi-byte punctuation.
+if (bytes.length !== chars) throw new Error(`the line is ${chars} characters but ${bytes.length} bytes: not ASCII`);
+
 mkdirSync(outDir, { recursive: true });
 const target = join(outDir, "entry.txt");
 writeFileSync(target, bytes);
