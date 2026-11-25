@@ -1,1 +1,1 @@
-v3.1.0 — Fixed a desync where the itch relocates to wherever the hand is not.
+v2.1.0: Fixed a bug where standing up too fast reboots the eyes. The boot now runs long enough to reconsider standing.

@@ -1,4 +1,4 @@
-// Local mirror of the gate for the "Real-Life Patch Notes" entry (arm 2).
+// Local mirror of the gate for the "Real-Life Patch Notes" entry (arm 3).
 //
 // It runs main.ts twice into two separate directories and holds both files to the
 // published rules: UTF-8, 1-160 characters, not only white space, one line, no
@@ -44,8 +44,8 @@ check("one line, no control characters", !/[\u0000-\u001f\u007f]/.test(text));
 
 check("opens on a version number", /^v\d+(\.\d+){1,3}\b/.test(text), text.slice(0, 12));
 check("states a fix, in the release register", /\bFixed\b/.test(text));
-check("names the defect in engineering words", /\bdesync\b/.test(text));
-check("names the bug of the body it is about", /\bitch\b/.test(text));
+check("names the defect in engineering words", /\breboots?\b/.test(text));
+check("names the bug of the body it is about", /\beyes\b/.test(text) && /\bstanding up\b/.test(text));
 check("carries no second-beat clause", !/Workaround:|Known issue:/i.test(text));
 check("no double space and no trailing space", !/ {2}/.test(text) && !/ $/.test(text));
 check("no stray double em dash or doubled punctuation", !/—.*—|,,|\.\./.test(text));

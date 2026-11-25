@@ -1,22 +1,60 @@
-# Lines cut before arm 2 shipped
+# Arm 3 — the recognisable-bug arm
 
-Arm 1 shipped `v2.6.0` (the bladder's race condition, with a `Workaround:`) and
-scored 632,750, rank 41 of 2,917 in round 3. These are the lines cut for arm 2,
-and why, held against the judge's five criteria in order.
+Measured before writing, not guessed.
 
-| line | chars | cut for |
-|---|---|---|
-| `v2.4.1 — Fixed a bug where entering a room wipes the reason you came in; the only restore point is the doorway.` | 109 | already on the board: the entry at place 40 is this joke at 633,014. A copy of a better-placed line cannot beat it. |
-| `v6.1.0 — Fixed an issue where standing up too fast unloads the vision driver before the legs finish booting.` | 100 | two beats. "unloads the vision driver" is the joke; "before the legs finish booting" is a second joke paying for itself late. |
-| `v2.0.5 — Fixed a bug where the 3 a.m. brain replays a conversation from 2009 at full resolution.` | 82 | taken twice on the board (places 38 and 45, 634,420 and 631,380). |
-| `v5.2.1 — Fixed a bug where the body wakes at 3 a.m. to check whether tomorrow still exists.` | 78 | not a recognisable bug; it is a mood. Criterion 4 fails first. |
-| `v1.8.2 — Fixed a race condition where the sneeze fires before the eyelids finish closing.` | 80 | true-ish and dry, but the reader has to be told the fact before the joke lands; criterion 2 wants the joke on the first read. |
-| `v2.9.4 — Fixed a bug where one nostril enters maintenance mode the moment the other is needed.` | 80 | strong register, thin laugh: "maintenance mode" is the whole joke and it is a quiet one. |
-| `v3.0.2 — Fixed a bug where a name loads only after you stop asking for it.` | 65 | the bug is real and universal, but nothing in it winces; it is a quirk, not a defect. |
+## What the board said
 
-Shipped: **`v3.1.0 — Fixed a desync where the itch relocates to wherever the hand
-is not.`** (77 characters, 79 bytes). One bug, one fix, the joke inside the fix,
-and the smallest text on a board where an equal rate goes to fewer bytes.
+Round 3 of 6 (judged 25 Nov ~10:35Z) put this entry at **41 of 2,917, score 632,750**.
+The ten places around it sat inside **4,700 millionths**:
 
-Earlier candidates for arm 1 (`v2.6.0`) stayed in the git history beside the
-lines above.
+```
+place 36  635,850   "Firm Quadrant"
+place 37  635,669   "Polar Ember"
+place 38  634,420   "Patch: brain replay 2 AM"
+place 39  633,930   "Real-Life Patch Notes"
+place 40  633,014   "v2.4.1: fixed a bug where entering a room wiped the reason you came in;
+                     the only restore point was standing in the doorway."
+place 41  632,750   us — v2.6.0, the bladder's race condition
+place 42  632,594   ...
+place 43  631,786   "The Doorway Flush"
+place 44  631,566   "Candid Sonar"
+place 45  631,380   "v3.7.2: Brain Replays 2009 in 4K"
+place 46  631,150   "Real-Life Patch Notes: The Comedy Changelog"
+```
+
+So the judge's margins in this band are a few hundred millionths: at this
+strength every line reads roughly equally funny. The lever is not a better
+punchline, it is criterion 4 — a bug the reader recognises in one second.
+
+## What the visible field was using
+
+Of the eleven visible neighbours, six name the same two bugs: the 3 a.m. brain
+replay (38, 45), the doorway / walking-into-a-room reset (40, 43), plus the itch
+(arm 2) and the bladder (arm 1). A pairwise judge that has just read "brain
+replay 2 AM" is hard to surprise with a third brain replay.
+
+## The change (one)
+
+Move to a body bug the visible field was not using, and keep everything else:
+the shipped-fix register, the version header, one idea, no second-beat clause.
+
+```
+v2.1.0: Fixed a bug where standing up too fast reboots the eyes. The boot now runs long enough to reconsider standing.
+```
+
+118 characters / 118 bytes.
+
+- criterion 1: a patch note, about a bug of the body (orthostatic blackout).
+- criterion 2: the idea is that the fix is a longer outage — the "repair" gives
+  you exactly the two seconds in which you regret standing up.
+- criterion 3: version, "Fixed", "The boot now runs…" — a fix stated as if it shipped.
+- criterion 4: everybody has lost the room for two seconds getting out of a chair;
+  the field next to us was not writing about it.
+- criterion 5: 118 of 160, two sentences, no Workaround clause.
+
+## Candidates cut
+
+- `v1.7.0: Fixed a bug where the brain keeps a 4K copy of the thing you said in 2014.` — storage joke, but "4K copy" is already in the visible field (place 45).
+- `v2.7.1: Fixed a bug where hunger is reported as anger. Reporting path unchanged; the anger arrives first.` — funny, but "reporting path unchanged" is a second beat, and "unchanged" states no fix.
+- `v3.0.0: Fixed a bug where tiredness ships as one packet at 11 p.m.` — the 11 p.m. wall is the same family as the 3 a.m. replay next to us.
+- `v2.3.1: Fixed an issue where the body sleeps but the jaw keeps talking.` — sleep again.

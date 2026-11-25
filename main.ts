@@ -13,11 +13,13 @@
 // newline, a control character, or no version number at all, rather than
 // shipping something the judge would read as prose.
 //
-// This is arm 2 of the entry. Criterion 5 of the brief asks that every character
-// work, and the round-3 board measured the field inside 5,000 millionths of a
-// win rate, so this arm also refuses its own padding: a line past 120 characters
-// is doing a second joke or a second anecdote, and arm 1's 139-character line
-// with its "Workaround:" clause was the measured example of that.
+// This is arm 3 of the entry. The measured reason for it: the round-3 board put
+// this entry at 41 of 2,917 (632,750) and the ten places around it inside 4,700
+// millionths (36th 635,850, 46th 631,150), and the eleven visible neighbours are
+// mostly the same two bugs -- the 3 a.m. brain replay, the itch that moves to the
+// free hand, the doorway flush. So the comedy is not the lever; the recognisable
+// bug is (criterion 4). Arm 3 keeps the shipped-fix register and moves to a body
+// bug the visible field was not using: the blackout from standing up too fast.
 //
 // Outside the grader, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
