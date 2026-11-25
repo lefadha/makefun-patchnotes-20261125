@@ -1,0 +1,1 @@
+v2.6.0 — Fixed a race condition where the bladder raises its alert only once the key is in the door. Workaround: leave the key in the door.
